@@ -1,6 +1,6 @@
 # Challenges
 
-In order to complete the challenges ahead, you need to previously install the [Flow](https://github.com/rafaelspinto/flow) Framework. To do that, please run the following commands in the command line:
+In order to complete the challenges ahead, you need to previously install the [Flow](https://github.com/sergiospinto/flow) Framework. To do that, please run the following commands in the command line:
 
 
 ```shell
