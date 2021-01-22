@@ -12,15 +12,26 @@ import java.util.Map;
 @RunWith(JUnit4.class)
 public class EmailTest {
 
-  @Test
-  public void testRun_AdapterIsCompliantWithProtocol_AppHasHelloMessage() throws Exception {
-    IAgent user = new UserAgent();
-    Map<String, IAdapter> adapters = new HashMap<String, IAdapter>();
-    adapters.put("EMAIL", new EmailAdapter());
+    @Test
+    public void testRun_AdapterIsCompliantWithProtocol_AppHasHelloMessage() throws Exception {
+        IAgent user = new UserAgent("MSG:hello");
+        Map<String, IAdapter> adapters = new HashMap<String, IAdapter>();
+        adapters.put("EMAIL", new EmailAdapter());
 
-    EmailApp app = new EmailApp();
-    Engine engine = new Engine(user, adapters, app);
-    engine.run();
-    Assert.assertEquals("hello", app.popMessage());
-  }
+        EmailApp app = new EmailApp();
+        Engine engine = new Engine(user, adapters, app);
+        engine.run();
+        Assert.assertEquals("hello", app.popMessage());
+    }
+
+    @Test(expected = ProtocolException.class)
+    public void testRun_AdapterIsCompliantWithProtocol_AppHasHelloMessageError() throws Exception {
+            IAgent user = new UserAgent("hello");
+            Map<String, IAdapter> adapters = new HashMap<String, IAdapter>();
+            adapters.put("EMAIL", new EmailAdapter());
+
+            EmailApp app = new EmailApp();
+            Engine engine = new Engine(user, adapters, app);
+            engine.run();
+    }
 }
